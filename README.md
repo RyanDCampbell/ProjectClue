@@ -1,6 +1,6 @@
 
 
-ProjectClue Version 0.1
+## ProjectClue Version 0.1
 
 To compile and run the code:
 
@@ -14,7 +14,7 @@ To compile and run the code:
 
 
 
-To compile and run the test suit:
+## To compile and run the test suit:
 
 1) navigate to the folder path that contains all the files I have provided (In my case, the command is "cd clue").
 
