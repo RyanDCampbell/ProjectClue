@@ -10,12 +10,11 @@
 // getter methods for each variable
 //-----------------------------------------
 
-public class Guess
-{
-    private boolean accusation;
-    private Card weapon;
-    private Card suspect;
-    private Card location;
+public class Guess {
+    private final boolean accusation;
+    private final Card weapon;
+    private final Card suspect;
+    private final Card location;
 
     public Guess(boolean accusation, Card weapon, Card suspect, Card location){
         this.accusation = accusation;
@@ -27,21 +26,17 @@ public class Guess
     public boolean getAccusation() {
         return accusation;
     }
-
     public Card getWeapon(){
         return weapon;
     }
-
     public Card getSuspect() {
         return suspect;
     }
-
     public Card getLocation(){
         return location;
     }
 
-    public String print()
-    {
+    public String print() {
         return suspect.getValue() + " in the " + location.getValue() +  " with the " + weapon.getValue();
     }
 }

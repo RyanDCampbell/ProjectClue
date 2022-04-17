@@ -1,7 +1,5 @@
 // CLASS: Model
-//
 // Author: Ryan Campbell
-//
 // REMARKS: This Class is the main logic of
 // the program. This Class selects the answer
 // which consists of a weapon, location and

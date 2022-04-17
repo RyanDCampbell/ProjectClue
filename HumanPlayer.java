@@ -1,7 +1,5 @@
 // CLASS: HumanPlayer
-//
 // Author: Ryan Campbell
-//
 // REMARKS: This Class extends the Player
 // Class.  This class has several methods
 // defined that will override the parent's
@@ -14,12 +12,9 @@ import java.util.Scanner;
 
 public class HumanPlayer extends Player
 {
-
-    public HumanPlayer(int numPlayers, int index, ArrayList<Card> ppl, ArrayList<Card> places, ArrayList<Card>  weapons){
-        this.setUp(numPlayers, index, ppl, places, weapons);
+    public HumanPlayer(int numPlayers, int index, ArrayList<Card> suspects, ArrayList<Card> locations, ArrayList<Card>  weapons){
+        this.setUp(numPlayers, index, suspects, locations, weapons);
     }
-
-
 
     //------------------------------------------------------
     // setCard
@@ -56,10 +51,9 @@ public class HumanPlayer extends Player
         System.out.println("Start of turn: \"It is your turn.\"");
 
         //Ask for person: "Which person do you want to suggest?"
-        System.out.println("Which person do you want to suggest?");
-        for(int i = 0; i < ppl.size(); i++)
-        {
-            currCard = ppl.get(i);
+        System.out.println("Which suspect would you like to suggest?");
+        for(int i = 0; i < suspects.size(); i++) {
+            currCard = suspects.get(i);
             System.out.println(i + ". " + currCard.getValue());
         }
 
@@ -67,38 +61,34 @@ public class HumanPlayer extends Player
 
         //Still need to deal with negative numbers and zero
         while(!keyboard.hasNextInt()){
-
-            System.out.println("Please enter a valid number.\nWhich person do you want to suggest?");
+            System.out.println("Please enter a valid number.\nWhich suspect would you like to suggest?");
             keyboard = new Scanner(System.in);
         }
-        guessIndex = keyboard.nextInt()%ppl.size();
-        suspect = ppl.get(guessIndex);
+        guessIndex = keyboard.nextInt()%suspects.size();
+        suspect = suspects.get(guessIndex);
         System.out.println(suspect.getValue());
 
 
         //Ask for place: "Which location do you want to suggest?"
-        System.out.println("\nWhich location do you want to suggest?");
-        for(int i = 0; i < places.size(); i++)
-        {
-            currCard = places.get(i);
+        System.out.println("\nWhich location would you like to suggest?");
+        for(int i = 0; i < locations.size(); i++) {
+            currCard = locations.get(i);
             System.out.println(i + ". " + currCard.getValue());
         }
 
         keyboard = new Scanner(System.in);
         while(!keyboard.hasNextInt()){
-
-            System.out.println("Please enter a valid number.\nWhich location do you want to suggest?");
+            System.out.println("Please enter a valid number.\nWhich location would you like to suggest?");
             keyboard = new Scanner(System.in);
         }
-        guessIndex = keyboard.nextInt()%places.size();
-        location = places.get(guessIndex);
+        guessIndex = keyboard.nextInt()%locations.size();
+        location = locations.get(guessIndex);
         System.out.println(location.getValue());
 
 
         //Ask for weapon: Which weapon do you want to suggest?"
-        System.out.println("\nWhich weapon do you want to suggest?");
-        for(int i = 0; i < weapons.size(); i++)
-        {
+        System.out.println("\nWhich weapon would you like to suggest?");
+        for(int i = 0; i < weapons.size(); i++) {
             currCard = weapons.get(i);
             System.out.println(i + ". " + currCard.getValue());
         }
@@ -106,8 +96,7 @@ public class HumanPlayer extends Player
         keyboard = new Scanner(System.in);
         //Still need to deal with negative numbers and zero
         while(!keyboard.hasNextInt()){
-
-            System.out.println("Please enter a valid number.\nWhich weapon do you want to suggest?");
+            System.out.println("Please enter a valid number.\nWhich weapon would you like to suggest?");
             keyboard = new Scanner(System.in);
         }
         guessIndex = keyboard.nextInt()%weapons.size();
@@ -119,10 +108,10 @@ public class HumanPlayer extends Player
         keyboard = new Scanner(System.in);
         char answer = keyboard.next().charAt(0);
         answer = Character.toLowerCase(answer);
+
         //Still need to deal with negative numbers and zero
         while(answer != 'n' && answer != 'y'){
-
-            System.out.println("Please enter either 'Y' or 'N'.\nWhich person do you want to suggest?");
+            System.out.println("Please enter either 'Y' or 'N'.\nIs this an accusation (Y/N)?");
             keyboard = new Scanner(System.in);
             answer = keyboard.next().charAt(0);
             answer = Character.toLowerCase(answer);
@@ -153,9 +142,9 @@ public class HumanPlayer extends Player
         //Answer the guess by showing a Card if possible.
         Card answer = null;
 
-        if(pplHand.contains((Card)g.getSuspect()) || placesHand.contains((Card)g.getLocation()) || weaponsHand.contains((Card)g.getWeapon()))
+        if(suspectsHand.contains((Card)g.getSuspect()) || locationsHand.contains((Card)g.getLocation()) || weaponsHand.contains((Card)g.getWeapon()))
         {
-            System.out.println("Player " + ip.getIndex() + " asked you about Suggestion: " + g.print() + ". Which do you show?");
+            System.out.println("Player " + ip.getIndex() + " asked you about Suggestion: " + g.print() + ". Which card do you show?");
 
             ArrayList<Card> responses = new ArrayList<Card>();
 
@@ -163,20 +152,19 @@ public class HumanPlayer extends Player
             String weapon = g.getWeapon().getValue();
             String suspect = g.getSuspect().getValue();
 
-            if(pplHand.contains((Card)g.getSuspect())){
+            if(suspectsHand.contains((Card)g.getSuspect())){
                 responses.add(g.getSuspect());
             }
             if(weaponsHand.contains((Card)g.getWeapon())){
                 responses.add(g.getWeapon());
             }
-            if(placesHand.contains((Card)g.getLocation())){
+            if(locationsHand.contains((Card)g.getLocation())){
                 responses.add(g.getLocation());
             }
 
             Card currCard;
             int guessIndex = 0;
-            for(int i = 0; i < responses.size(); i++)
-            {
+            for(int i = 0; i < responses.size(); i++) {
                 currCard = responses.get(i);
                 System.out.println(i + ". " + currCard.getValue());
             }
@@ -193,8 +181,7 @@ public class HumanPlayer extends Player
             answer = responses.get(guessIndex);
             System.out.println(answer.getValue());
         }
-        else
-        {
+        else {
             System.out.println("Player " + ip.getIndex() + " asked you about Suggestion: " + g.print() + ", but you couldn't answer.");
         }
         return answer;

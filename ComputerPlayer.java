@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class ComputerPlayer extends Player
 {
-    public ComputerPlayer(int numPlayers, int index, ArrayList<Card> ppl, ArrayList<Card> places, ArrayList<Card>  weapons)
+    public ComputerPlayer(int numPlayers, int index, ArrayList<Card> suspects, ArrayList<Card> locations, ArrayList<Card>  weapons)
     {
-        this.setUp(numPlayers, index, ppl, places, weapons);
+        this.setUp(numPlayers, index, suspects, locations, weapons);
     }
 
     //------------------------------------------------------
@@ -31,17 +31,10 @@ public class ComputerPlayer extends Player
 
         super.setCard(c);
         //Remove the cards in the hands of the computer player from the possible solution.
-        if(c.getType().equals("weapon"))
-        {
-            weapons.remove(c);
-        }
-        else if(c.getType().equals("suspect"))
-        {
-            ppl.remove(c);
-        }
-        else if(c.getType().equals("location"))
-        {
-            places.remove(c);
+        switch (c.getType()) {
+            case "weapon" -> weapons.remove(c);
+            case "suspect" -> suspects.remove(c);
+            case "location" -> locations.remove(c);
         }
     }
 }

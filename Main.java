@@ -76,6 +76,7 @@ public class Main {
 
             if(keyboard.hasNextInt()){
                 userInput = keyboard.nextInt();
+                //Support 2 - 10 players inclusive.
                 if(userInput > 0 && userInput < 10){
                     numComputers = userInput;
                 }

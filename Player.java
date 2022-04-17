@@ -1,29 +1,25 @@
-
-// CLASS: abstract class Player
-//
+// CLASS: Player
 // Author: Ryan Campbell
-//
 // REMARKS: An abstract Player type that
 // implements the IPlayer interface
-//
+
 //-----------------------------------------
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Player implements IPlayer
-{
+public abstract class Player implements IPlayer {
     private int numPlayers;
     private int index;
 
     //Lists of all ppl, places and weapons.
-    ArrayList<Card> ppl;
-    ArrayList<Card> places;
+    ArrayList<Card> suspects;
+    ArrayList<Card> locations;
     ArrayList<Card> weapons;
 
     //Particular cards that the player is holding
-    ArrayList<Card> pplHand;
-    ArrayList<Card> placesHand;
+    ArrayList<Card> suspectsHand;
+    ArrayList<Card> locationsHand;
     ArrayList<Card> weaponsHand;
 
     //------------------------------------------------------
@@ -35,19 +31,18 @@ public abstract class Player implements IPlayer
     //     Takes in the number of players, the player's position at
     // the table, along with an arraylist of each type of card.
     //------------------------------------------------------
-    @SuppressWarnings("unchecked")
-    public void setUp(int numPlayers, int index, ArrayList<Card> ppl,
-                      ArrayList<Card> places, ArrayList<Card> weapons) {
+    public void setUp(int numPlayers, int index, ArrayList<Card> suspects,
+                      ArrayList<Card> locations, ArrayList<Card> weapons) {
 
         this.numPlayers = numPlayers;
         this.index = index;
 
-        this.ppl = (ArrayList<Card>) ppl.clone();
-        this.places = (ArrayList<Card>) places.clone();
+        this.suspects = (ArrayList<Card>) suspects.clone();
+        this.locations = (ArrayList<Card>) locations.clone();
         this.weapons = (ArrayList<Card>) weapons.clone();
 
-        this.pplHand = new ArrayList<Card>();
-        this.placesHand = new ArrayList<Card>();
+        this.suspectsHand = new ArrayList<Card>();
+        this.locationsHand = new ArrayList<Card>();
         this.weaponsHand = new ArrayList<Card>();
 
     }
@@ -62,14 +57,10 @@ public abstract class Player implements IPlayer
     //------------------------------------------------------
     public void setCard(Card c) {
 
-        if(c.getType().equals("weapon")){
-            weaponsHand.add(c);
-        }
-        else if(c.getType().equals("suspect")){
-            pplHand.add(c);
-        }
-        else if(c.getType().equals("location")) {
-            placesHand.add(c);
+        switch (c.getType()) {
+            case "weapon" -> weaponsHand.add(c);
+            case "suspect" -> suspectsHand.add(c);
+            case "location" -> locationsHand.add(c);
         }
     }
 
@@ -99,21 +90,17 @@ public abstract class Player implements IPlayer
         String location = g.getLocation().getValue();
         String weapon = g.getWeapon().getValue();
         String suspect = g.getSuspect().getValue();
-
         Card result = null;
 
-        if(pplHand.contains((Card)g.getSuspect()))
-        {
+        if(suspectsHand.contains((Card)g.getSuspect())) {
             result = g.getSuspect();
             System.out.print("Player "+ this.getIndex() +" answered. ");
         }
-        else if(placesHand.contains((Card)g.getLocation()))
-        {
+        else if(locationsHand.contains((Card)g.getLocation())) {
             result = g.getLocation();
             System.out.print("Player "+ this.getIndex() +" answered. ");
         }
-        else if(weaponsHand.contains((Card)g.getWeapon()))
-        {
+        else if(weaponsHand.contains((Card)g.getWeapon())) {
             result = g.getWeapon();
             System.out.print("Player "+ this.getIndex() +" answered. ");
         }
@@ -134,27 +121,24 @@ public abstract class Player implements IPlayer
         Card weapon;
         Card suspect;
         Card location;
-
         Guess guess = null;
 
         System.out.println("Player " + this.getIndex() + "'s turn:");
 
-        if(ppl.size() == 1 && places.size() == 1 && weapons.size() == 1)
-        {
+        if(suspects.size() == 1 && locations.size() == 1 && weapons.size() == 1) {
             accusation = true;
         }
 
         weapon = weapons.get((int) (Math.random()*weapons.size()));
-        suspect = ppl.get((int)(Math.random()*ppl.size()));
-        location = places.get((int)(Math.random()*places.size()));
+        suspect = suspects.get((int)(Math.random()*suspects.size()));
+        location = locations.get((int)(Math.random()*locations.size()));
 
         guess = new Guess(accusation, weapon, suspect, location);
 
         if(guess.getAccusation()){
             System.out.println("Player " + this.getIndex() + ": Accusation:  " + guess.print() + ".\n");
         }
-        else
-        {
+        else {
             System.out.println("Player " + this.getIndex() + ": Suggestion:  " + guess.print() + ".\n");
         }
         return guess;
@@ -172,22 +156,13 @@ public abstract class Player implements IPlayer
     public void receiveInfo(IPlayer ip, Card c){
 
         if (c != null){
-            if(c.getType().equals("weapon"))
-            {
-                weapons.remove(c);
+            switch (c.getType()) {
+                case "weapon" -> weapons.remove(c);
+                case "suspect" -> suspects.remove(c);
+                case "location" -> locations.remove(c);
             }
-            else if(c.getType().equals("suspect"))
-            {
-                ppl.remove(c);
-            }
-            else if(c.getType().equals("location"))
-            {
-                places.remove(c);
-            }
-            ;
         }
-        else
-        {
+        else {
             System.out.println("Player " + getIndex()+ " was unable to answer.");
         }
     }

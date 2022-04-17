@@ -149,8 +149,8 @@ public class UnitTests
         //Card result = computer1.canAnswer(guess, null);
 
         assert(!computer1.weaponsHand.contains(guess.getWeapon()));
-        assert(!computer1.pplHand.contains(guess.getSuspect()));
-        assert(!computer1.placesHand.contains(guess.getLocation()));
+        assert(!computer1.suspectsHand.contains(guess.getSuspect()));
+        assert(!computer1.locationsHand.contains(guess.getLocation()));
 
     }
 
