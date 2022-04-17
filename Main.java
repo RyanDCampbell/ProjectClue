@@ -68,7 +68,7 @@ public class Main {
 
 
 
-        System.out.println("Welcome to \"Clue\"");
+        System.out.println("Welcome to \"Clue\"!");
         while(numComputers <= 0) {
 
             System.out.println("How many computer players would you like?");
@@ -87,74 +87,41 @@ public class Main {
 
 
 
-
         System.out.println("Here are the names of all the suspects:");
-        String output = "";
-        Card currCard;
-        for(int i = 0; i < suspects.size(); i++)
-        {
-            currCard = suspects.get(i);
-            if(i < suspects.size()-1)
-            {
-                output += currCard.getValue() + ", ";
-            }
-            else
-            {
-                output += currCard.getValue() + "\n";
-            }
-        }
-        System.out.println(output);
+        outputDeck(suspects);
 
-        System.out.println("Here are all the locations:");
-        output = "";
-        for(int i = 0; i < locations.size(); i++)
-        {
-            currCard = locations.get(i);
-            if(i < locations.size()-1)
-            {
-                output += currCard.getValue() + ", ";
-            }
-            else
-            {
-                output += currCard.getValue() + "\n";
-            }
-        }
-        System.out.println(output);
+        System.out.println("Here are the names of all the locations:");
+        outputDeck(locations);
 
-        System.out.println("Here are all the weapons:");
-        output = "";
-        for(int i = 0; i < weapons.size(); i++)
-        {
-            currCard = weapons.get(i);
-            if(i < weapons.size()-1)
-            {
-                output += currCard.getValue() + ", ";
-            }
-            else
-            {
-                output += currCard.getValue() + "\n";
-            }
-        }
-        System.out.println(output);
+        System.out.println("Here are the names of all the weapons:");
+        outputDeck(weapons);
+
+
 
         Model game = new Model(deck, weapons, suspects, locations, players);
-
-        game.setupPlayers(players, weapons,suspects,locations,numComputers + 1);
+        game.setupPlayers(players, weapons, suspects, locations, numComputers + 1);
 
         System.out.println("Dealing cards...");
-
         game.setupCards(deck);
 
-        System.out.println("Playing...");
-
+        System.out.println("\nBeginning Game.");
         game.play();
 
-        System.out.println("Game over");
-
+        System.out.println("Game over.");
     }
 
-
-
-
-
+    private static void outputDeck(ArrayList<Card> deck) {
+        Card currCard;
+        StringBuilder output = new StringBuilder();
+        for(int i = 0; i < deck.size(); i++) {
+            currCard = deck.get(i);
+            if(i < deck.size() - 1) {
+                output.append(currCard.getValue()).append(", ");
+            }
+            else {
+                output.append(currCard.getValue()).append("\n");
+            }
+        }
+        System.out.println(output);
+    }
 }
