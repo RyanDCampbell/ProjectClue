@@ -11,12 +11,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        int numComputers;
+        int numComputers = 0;
+        int userInput = 0;
 
         //There are 3 types of cards. Weapons, suspects and locations.
         ArrayList<Card> weapons = new ArrayList<Card>();
@@ -64,24 +66,27 @@ public class Main {
         deck.addAll(locations);
         Collections.shuffle(deck);
 
-        System.out.println("Welcome to \"whodunnit?\"\nHow many computer opponents would you like?");
 
-        Scanner keyboard = new Scanner(System.in);
 
-        //Still need to deal with negative numbers and zero
-        while(!keyboard.hasNextInt()){
+        System.out.println("Welcome to \"Clue\"");
+        while(numComputers <= 0) {
 
-            System.out.println("Please enter a number greater than 0.\nHow many computer opponents would you like?");
-            keyboard = new Scanner(System.in);
+            System.out.println("How many computer players would you like?");
+            Scanner keyboard = new Scanner(System.in);
+
+            if(keyboard.hasNextInt()){
+                userInput = keyboard.nextInt();
+                if(userInput > 0 && userInput < 10){
+                    numComputers = userInput;
+                }
+            }
+            else {
+                System.out.println("Please select a number between 1 and 9 inclusive.");
+            }
         }
-        numComputers = keyboard.nextInt();
-        keyboard.nextLine();
 
-        if(numComputers < 1)
-        {
-            System.out.println("The minimum number of computer opponents is 1.");
-            numComputers = 1;
-        }
+
+
 
         System.out.println("Here are the names of all the suspects:");
         String output = "";
