@@ -24,6 +24,7 @@ public class Model
     private Card locationAnswer;
     private Card perpetratorAnswer;
 
+    @SuppressWarnings("unchecked")
     public Model(ArrayList<Card> cards, ArrayList<Card> weapons, ArrayList<Card> suspects, ArrayList<Card> locations, ArrayList<Player> players){
 
         this.players = (ArrayList<Player>) players;

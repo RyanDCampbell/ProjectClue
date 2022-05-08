@@ -1,22 +1,23 @@
 
 
-## ProjectClue Version 0.1
+## Clue Version 0.2
 
 To compile and run the code:
 
-1) navigate to the folder path that contains all the files I have provided (In my case, the command is "cd clue").
+1) Navigate to the folder path that contains the Clue code.
 
-2) Copy and paste this command to compile .java files: javac Card.java ComputerPlayer.java Guess.java HumanPlayer.java IPlayer.java Model.java Player.java Main.java
+2) Open a new unix terminal 
 
-3) Enter the command: java Main
+3) To compile the program, enter the command: make
 
-5)The program will run, displaying the output to the console and print an "End of processing" message upon completion.
+4) To run the program, enter the command: java Main 
 
+5) The program will run, displaying the output to the console and print an "End of processing" message upon completion.
 
 
 ## To compile and run the test suit:
 
-1) navigate to the folder path that contains all the files I have provided (In my case, the command is "cd clue").
+1) Navigate to the folder path that contains the Clue code.
 
 2) Copy and paste this command to compile .java files: javac Card.java ComputerPlayer.java Guess.java HumanPlayer.java IPlayer.java Model.java Player.java Main.java
 

@@ -2,14 +2,11 @@
 // Author: Ryan Campbell
 // REMARKS: An abstract Player type that
 // implements the IPlayer interface
-
 //-----------------------------------------
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public abstract class Player implements IPlayer {
-    private int numPlayers;
     private int index;
 
     //Lists of all ppl, places and weapons.
@@ -31,10 +28,10 @@ public abstract class Player implements IPlayer {
     //     Takes in the number of players, the player's position at
     // the table, along with an arraylist of each type of card.
     //------------------------------------------------------
+    @SuppressWarnings("unchecked")
     public void setUp(int numPlayers, int index, ArrayList<Card> suspects,
                       ArrayList<Card> locations, ArrayList<Card> weapons) {
 
-        this.numPlayers = numPlayers;
         this.index = index;
 
         this.suspects = (ArrayList<Card>) suspects.clone();
