@@ -1,8 +1,4 @@
-
-.idea/Clue.iml
-.idea/modules.xml
-.idea/workspace.xml
-.idea/vcs.xml
+.idea
 Card.class
 ComputerPlayer.class
 Guess.class
