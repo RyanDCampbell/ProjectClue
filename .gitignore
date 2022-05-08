@@ -3,3 +3,10 @@
 .idea/modules.xml
 .idea/workspace.xml
 .idea/vcs.xml
+Card.class
+ComputerPlayer.class
+Guess.class
+HumanPlayer.class
+IPlayer.class
+Main.class
+Player.class
